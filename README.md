@@ -1,1 +1,1 @@
-# FSML---MC346
+# FSML - MC346(Finite State Machine Language)
