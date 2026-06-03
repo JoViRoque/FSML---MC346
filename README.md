@@ -9,12 +9,7 @@
 >Motivação: Criar essas máquinas em linguagens comuns costuma exigir muitos testes com if/else ou códigos longos e confusos. Isso deixa o código difícil de ler e >facilita a criação de erros.
 
 >Relevância: A FSML é uma linguagem simples criada dentro do Scheme. Ela permite desenhar estados e transições escrevendo quase da mesma forma que desenhamos no >papel. Isso deixa o código limpo, fácil de entender e pronto para ser testado e simulado na hora.
->
-> Contextualização da linguagem
->
-> Motivação
->
-> Relevância
+
 
 ## Slides
 
