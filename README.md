@@ -12,7 +12,9 @@ Em termos simples, uma máquina de estado é um modelo matemático que descreve 
 
 ## Slides
 
-> Coloque aqui o link para o PDF da apresentação final.
+https://github.com/JoViRoque/FSML---MC346/blob/a891226f5b1a0747748d1331f21223b00e55ac45/Apresenta%C3%A7%C3%A3o%20FSML.pdf
+
+---
 
 ## Sintaxe da Linguagem
 
@@ -30,6 +32,7 @@ Cria uma nova instância de máquina de estados. A sintaxe exige que você liste
     ...))
 ```
 
+---
 
 ## Gramática da Linguagem
 
@@ -59,9 +62,14 @@ Identificador     ::= Letra { Letra | Digito | '_' | '-' }
 Letra             ::= [a-zA-Z]
 Digito            ::= [0-9]
 ```
+
+---
+
 ## Notebook
 
 https://github.com/JoViRoque/FSML---MC346/blob/d344ea4a5337fd7d3aee716724c790955f1bd470/FSML.ipynb
+
+---
 
 ## Exemplos Selecionados
 
@@ -78,28 +86,32 @@ Como caso de uso principal, modelou-se o **Ciclo de Vida de uma Tarefa em um Sis
     (blocked PARA ready   COM desbloqueio_normal)
     (blocked PARA running COM desbloqueio_prioritario)))
 ```
+
+---
+
 ## Discussão
 
-> Discussão dos resultados. Relacionar os resultados com a proposta inicial apresentada na introdução.
->
-> A discussão dos resultados também pode ser feita opcionalmente na seção de Resultados, na medida em que os resultados são apresentados. Aspectos importantes a serem discutidos: Por que seu modelo alcançou (ou não) um bom resultado? É possível tirar conclusões dos resultados? Quais? Há indicações de direções para estudo? São necessários trabalhos mais profundos?
+A implementação da FSML provou que a ideia central de um autômato pode ser devidamente representada em uma DSL, aproveitando conceitos poderosos do paradigma funcional como **Macros Higiênicos (`syntax-rules`)** e **Closures**. No entanto, essa jornada trouxe desafios sintáticos claros. A natureza da linguagem Scheme exige uma adaptação à sua estrutura rigorosa e, inevitavelmente, ao uso massivo de parênteses encadeados `( ... )`, o que pode tornar a leitura inicial um pouco intimidadora para quem está acostumado com linguagens imperativas tradicionais.
+A FSML demonstra que, para resolver problemas específicos, **às vezes a simplicidade é muito mais importante do que a robustez excessiva**. Em vez de inflar o sistema com estruturas de objetos redundantes, uma DSL simples e direta resolve o problema de forma limpa.
+
+---
 
 ## Conclusão
 
-> Destacar as principais conclusões obtidas no desenvolvimento do projeto.
->
-> Destacar os principais desafios enfrentados.
->
-> Principais lições aprendidas.
+Para fins práticos e didáticos, o desenvolvimento deste projeto foi extremamente interessante e enriquecedor. Ele me forçou a sair da zona de conforto da POO e a enxergar como os paradigmas funcional e sintático podem trabalhar juntos.
+
+* **Principais Desafios:** A adaptação ao ecossistema do Scheme e a gestão visual de seus múltiplos parênteses.
+* **Lições Aprendidas:** Nem sempre a complexidade de uma linguagem ou framework é algo positivo. Forçar um paradigma (como POO) a resolver problemas que se alinham melhor com abordagens declarativas gera códigos inchados. Aprendemos que limitar o escopo e focar em uma sintaxe minimalista entrega uma solução mais elegante.
+
+---
 
 # Trabalhos Futuros
 
-> O que poderia ser melhorado se houvesse mais tempo?
->
-> Quais possíveis desdobramentos este projeto pode ter?
+Se houvesse mais tempo para o desenvolvimento da FSML, o foco total seria sair do escopo puramente textual e partir para a **visualização gráfica**:
 
-# Referências Bibliográficas
+1. **Interface Visual Interativa:** A nossa real intenção para o futuro do projeto seria criar uma camada visual (uma GUI ou aplicação web) onde o usuário pudesse desenhar os estados e transições na tela, gerando o código Scheme por trás, ou vice-versa. Máquinas de estados fazem muito mais sentido quando podemos **visualizá-las graficamente**.
 
+---
 # Referências Bibliográficas
 
 1. Santanchè, André, “Notas de Aula MC346.” 2026.  
