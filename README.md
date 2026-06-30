@@ -61,7 +61,7 @@ Digito            ::= [0-9]
 ```
 ## Notebook
 
-https://drive.google.com/file/d/13zHuiE1uzM_k_xHgGmDogbp4ls_VFLJv/view?usp=drive_link
+https://github.com/JoViRoque/FSML---MC346/blob/d344ea4a5337fd7d3aee716724c790955f1bd470/FSML.ipynb
 
 ## Exemplos Selecionados
 
