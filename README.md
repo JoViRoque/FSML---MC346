@@ -15,7 +15,7 @@
 
 > Coloque aqui o link para o PDF da apresentação parcial.
 
-## Sintaxe da Linguagem na Forma de Tutorial
+## Sintaxe da Linguagem
 
 > Apresente um guia de sintaxe da linguagem na forma explicativa.
 
