@@ -1,41 +1,88 @@
-# 
-
 # DSL `<FSML - Finite State Machine Language>`
 
 ## Descrição Resumida da DSL
 
->Contextualização da linguagem: Máquinas de estados são modelos usados para organizar o comportamento de sistemas que mudam de acordo com eventos, como jogos >>(estados: menu, jogando, pause) ou sistemas do dia a dia (uma catraca de acesso).
+>Contextualização da linguagem: Máquinas de Estado são um dos conceitos mais fundamentais, elegantes e subestimados da ciência da computação e da engenharia.
+Em termos simples, uma máquina de estado é um modelo matemático que descreve o comportamento de um sistema. Esse sistema só pode estar em um único estado por vez, e muda de estado através de transições disparadas por eventos.
 
->Motivação: Criar essas máquinas em linguagens comuns costuma exigir muitos testes com if/else ou códigos longos e confusos. Isso deixa o código difícil de ler e >facilita a criação de erros.
 
->Relevância: A FSML é uma linguagem simples criada dentro do Scheme. Ela permite desenhar estados e transições escrevendo quase da mesma forma que desenhamos no >papel. Isso deixa o código limpo, fácil de entender e pronto para ser testado e simulado na hora.
+>Motivação: Projetar e validar máquinas de estados à mão é um processo chato e demorado. Por causa disso, essa etapa essencial do planejamento costuma ser ignorada, o que resulta em sistemas mal testados e cheios de falhas na lógica.
 
+>Relevância: A FSML é uma linguagem simples criada dentro do Scheme. A FSML automatiza essa criação diretamente em código de forma simples e rápida. Ela elimina o trabalho manual, permitindo que o desenvolvedor simule e teste o comportamento da máquina instantaneamente.
 
 ## Slides
 
-> Coloque aqui o link para o PDF da apresentação parcial.
+> Coloque aqui o link para o PDF da apresentação final.
 
 ## Sintaxe da Linguagem
 
-> Apresente um guia de sintaxe da linguagem na forma explicativa.
+A FSML é uma linguagem declarativa que se divide em duas partes: o bloco estrutural de **Definição** e os comandos de **Operação (API)**.
+
+### 1. Bloco de Definição (`definir-maquina`)
+Cria uma nova instância de máquina de estados. A sintaxe exige que você liste os estados válidos e as regras de transição usando as palavras-chave exclusivas `PARA` e `COM`. 
+* **Nota:** Por padrão, o primeiro estado listado no bloco `(estados ...)` torna-se o ponto de partida inicial da máquina.
+
+```scheme
+(definir-maquina <nome-da-maquina>
+  (estados <estado_1> <estado_2> ... <estado_n>)
+  (transicoes
+    (<estado-origem> PARA <estado-destino> COM <evento>)
+    ...))
+```
+
 
 ## Gramática da Linguagem
 
-> Apresente a gramática da linguagem.
+A gramática da FSML foi modelada utilizando o formalismo **EBNF (Extended Backus-Naur Form)**. Escolheu-se essa abordagem pela clareza acadêmica e por sua perfeita adequação a linguagens homoicônicas, como o Scheme, onde a sintaxe textual mapeia diretamente a árvore de sintaxe abstrata através de S-expressions.
 
+```ebnf
+(* Regra Principal - Definição da DSL *)
+DeclaracaoMaquina ::= '(' 'definir-maquina' Identificador BlocoEstados BlocoTransicoes ')'
+
+(* Blocos Estruturais *)
+BlocoEstados      ::= '(' 'estados' Identificador { Identificador } ')'
+BlocoTransicoes   ::= '(' 'transicoes' { RegraTransicao } ')'
+RegraTransicao    ::= '(' Identificador 'PARA' Identificador 'COM' Identificador ')'
+
+(* Funções de Operação (API da Linguagem) *)
+ComandoExpressao  ::= CmdEstadoAtual | CmdPasso | CmdInvestigar | CmdResetar | CmdDefInício
+
+CmdEstadoAtual    ::= '(' 'estado-atual' Identificador ')'
+CmdPasso          ::= '(' 'passo' Identificador LiteralSimbolo ')'
+CmdInvestigar     ::= '(' 'investigar' Identificador LiteralSimbolo LiteralSimbolo ')'
+CmdResetar        ::= '(' 'resetar' Identificador ')'
+CmdDefInício      ::= '(' 'definir-inicio' Identificador LiteralSimbolo ')'
+
+(* Elementos Léxicos *)
+LiteralSimbolo    ::= "'" Identificador
+Identificador     ::= Letra { Letra | Digito | '_' | '-' }
+Letra             ::= [a-zA-Z]
+Digito            ::= [0-9]
+```
 ## Notebook
 
-> Coloque aqui o link para o notebook que implementa a linguagem.
+https://drive.google.com/file/d/13zHuiE1uzM_k_xHgGmDogbp4ls_VFLJv/view?usp=drive_link
 
 ## Exemplos Selecionados
 
-> Coloque um conjunto de exemplos selecionados e os resultados alcançados.
->
-> O ideal é que os exemplos sejam apresentados e possam ser executados diretamente no notebook.
+Como caso de uso principal, modelou-se o **Ciclo de Vida de uma Tarefa em um Sistema Operacional de Tempo Real (RTOS)**. O autômato possui os estados `ready` (pronto), `running` (em execução) e `blocked` (bloqueado por recurso).
 
+### Código de Inicialização da Máquina
+```scheme
+(definir-maquina tarefa-so
+  (estados ready running blocked)
+  (transicoes
+    (ready   PARA running COM obter_prioridade)
+    (running PARA ready   COM perder_prioridade)
+    (running PARA blocked COM aguardar_recurso)
+    (blocked PARA ready   COM desbloqueio_normal)
+    (blocked PARA running COM desbloqueio_prioritario)))
+```
 ## Discussão
 
-> Discussão dos resultados.
+> Discussão dos resultados. Relacionar os resultados com a proposta inicial apresentada na introdução.
+>
+> A discussão dos resultados também pode ser feita opcionalmente na seção de Resultados, na medida em que os resultados são apresentados. Aspectos importantes a serem discutidos: Por que seu modelo alcançou (ou não) um bom resultado? É possível tirar conclusões dos resultados? Quais? Há indicações de direções para estudo? São necessários trabalhos mais profundos?
 
 ## Conclusão
 
@@ -53,6 +100,10 @@
 
 # Referências Bibliográficas
 
-> Lista de artigos, links e referências bibliográficas.
->
-> Fiquem à vontade para escolher o padrão de referenciamento preferido pelo grupo.
+# Referências Bibliográficas
+
+1. Santanchè, André, “Notas de Aula MC346.” 2026.  
+2. Bacurau, R. Moreira, “Notas de Aula ES670.” 2026.
+3. Dybvig, R. Kent. *The Scheme Programming Language*. 4th Edition. MIT Press, 2009.
+4. Free Software Foundation. *GNU Guile Reference Manual*. Disponível em: <https://www.gnu.org/software/guile/manual/>.
+5. Notas de Aula da Disciplina de Paradigmas de Programação (Seção: Abstração com Macros e Scheme)
